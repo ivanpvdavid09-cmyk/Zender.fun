@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ZENDER</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Poppins',sans-serif;
+  background:#0B0B0B;
+  color:#E0E0E0;
+  overflow-x:hidden;
+}
+
+/* ===== Верхний баннер ===== */
+#top-banner{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:60px;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  z-index:1000;
+  box-shadow:0 2px 10px rgba(0,0,0,0.6);
+}
+.banner-left{
+  font-size:16px;
+  font-weight:600;
+  color:#fff;
+}
+#home-btn{
+  background:none;
+  border:1px solid #fff;
+  padding:8px 20px;
+  border-radius:8px;
+  font-size:15px;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+#home-btn:hover{
+  background:#fff;
+  color:#000;
+}
+
+/* ===== Canvas фон ===== */
+#bg-canvas{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:1;
+}
+
+/* ===== Контейнер ===== */
+section{
+  padding:120px 20px;
+  position:relative;
+  z-index:2;
+}
+.container{ max-width:1200px; margin:0 auto; }
+
+/* ===== Главный экран ===== */
+#main{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+#main h1{
+  font-size:70px;
+  color:#fff;
+  text-shadow:0 0 20px #fff;
+  margin-bottom:20px;
+}
+#main p{
+  font-size:22px;
+  color:#ccc;
+  margin-bottom:40px;
+}
+
+/* ===== Кнопка Скачать ===== */
+.glow-button#downloadBtn{
+  display:inline-block;
+  padding:15px 35px;
+  border:2px solid #fff;
+  border-radius:10px;
+  color:#fff;
+  font-size:18px;
+  font-weight:600;
+  transition:0.3s;
+  cursor:pointer;
+}
+.glow-button#downloadBtn:hover{
+  box-shadow: 0 0 20px #fff, 0 0 40px #fff;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ===== Подписи под кнопкой Скачать ===== */
+.download-info{
+  display:flex;
+  justify-content:space-between;
+  max-width:400px;
+  margin:20px auto 0 auto;
+  font-size:16px;
+  color:#ccc;
+}
+
+/* ===== Пакеты ===== */
+#traffic{
+  background:rgba(18,18,18,0.9);
+}
+#traffic .container{
+  text-align:center;
+}
+.packages{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:40px;
+}
+.package-card{
+  padding:30px;
+  width:300px;
+  background:rgba(30,30,30,0.7);
+  border-radius:20px;
+  text-align:center;
+  backdrop-filter:blur(5px);
+  transition:none !important;
+}
+.package-card:hover{
+  transform:none !important;
+  box-shadow:none !important;
+  background:rgba(30,30,30,0.7) !important;
+}
+/* ===== Кнопки пакетов ===== */
+.package-card .glow-button{
+  display:inline-block;
+  padding:10px 25px;
+  border:2px solid #fff;
+  border-radius:8px;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  margin-top:15px;
+}
+.package-card .glow-button:hover{
+  box-shadow: 0 0 20px #fff, 0 0 40px #fff;
+  color:#fff;
+  transform: scale(1.05);
+}
+
+/* ===== Скриншоты ===== */
+.screenshot-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+  margin-bottom:80px;
+}
+.screenshot-row.reverse{ flex-direction:row-reverse; }
+.screenshot-text h2{
+  font-size:36px;
+  margin-bottom:15px;
+  color:#fff;
+  text-shadow:0 0 15px #fff;
+}
+.screenshot-text p{
+  font-size:20px;
+  color:#ccc;
+}
+.screenshot-image img{
+  width:100%;
+  max-width:500px;
+  border-radius:15px;
+  transition:0.3s;
+  box-shadow:0 0 20px #00ffcc;
+}
+.screenshot-image img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 30px #00ffcc, 0 0 60px #00ffcc;
+}
+
+/* ===== FAQ ===== */
+#faq{text-align:center;}
+.faq-item{
+  max-width:700px;
+  margin:15px auto;
+  padding:25px;
+  border-radius:15px;
+  background:rgba(30,30,30,0.7);
+  cursor:pointer;
+  transition:0.3s;
+}
+.faq-item:hover{
+  box-shadow:0 0 25px #fff;
+}
+.faq-answer{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.5s ease;
+}
+
+/* ===== Сообщество ===== */
+#community{
+  margin-top:100px;
+  padding:80px 20px;
+  text-align:center;
+  background:rgba(15,15,15,0.7);
+  border-radius:20px;
+  box-shadow:0 0 25px #fff;
+}
+#community h2{
+  font-size:40px;
+  margin-bottom:15px;
+  text-shadow:0 0 20px #fff;
+}
+#community p{
+  font-size:18px;
+  color:#ccc;
+  margin-bottom:30px;
+}
+
+/* ===== Кнопка Telegram ===== */
+#community-btn{
+  padding:15px 40px;
+  font-size:20px;
+  font-weight:600;
+  border-radius:12px;
+  cursor:pointer;
+  border:2px solid #00ffcc;
+  background:rgba(0,0,0,0.6);
+  color:#00ffcc;
+  transition:0.3s;
+}
+#community-btn:hover{
+  background:#00ffcc;
+  color:#000;
+  transform:scale(1.1);
+}
+
+/* ===== Чат ===== */
+#corner-circle{
+  position:fixed;
+  bottom:40px;
+  right:40px;
+  width:60px;
+  height:60px;
+  background:#000;
+  border-radius:50%;
+  box-shadow:0 0 15px #fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  transition:0.3s;
+}
+#corner-circle:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #fff;
+}
+
+#chat-box{
+  position:fixed;
+  bottom:120px;
+  right:40px;
+  width:330px;
+  height:430px;
+  background:rgba(20,20,20,0.95);
+  border-radius:18px;
+  box-shadow:0 0 30px #00ffcc;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  animation:fadeChat 0.4s ease-out;
+  z-index:999;
+}
+
+@keyframes fadeChat{
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+#chat-header{
+  padding:12px 15px;
+  background:#111;
+  font-weight:600;
+  font-size:18px;
+  border-bottom:1px solid #333;
+}
+#chat-messages{
+  flex:1;
+  padding:10px 15px;
+  overflow-y:auto;
+  font-size:14px;
+}
+#chat-input{
+  display:flex;
+  border-top:1px solid #333;
+}
+#user-input{
+  flex:1;
+  padding:12px;
+  border:none;
+  outline:none;
+  background:#111;
+  color:#fff;
+}
+#send-btn{
+  background:#00ffcc;
+  border:none;
+  padding:10px 18px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* ===== Анимация появления блоков ===== */
+.fade-in{ opacity:0; transform:translateY(50px); transition:1s ease-out; }
+.fade-in.show{ opacity:1; transform:translateY(0); }
+
+</style>
+</head>
+<body>
+
+<!-- ===== Верхний баннер ===== -->
+<div id="top-banner">
+  <div class="banner-left">Zender</div>
+  <button id="home-btn">Главное</button>
+</div>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- ===== Главный экран ===== -->
+<section id="main" class="fade-in">
+  <div class="container">
+    <h1>ZENDER</h1>
+    <p>Мощный и безопасный чит для CS2</p>
+    <a class="glow-button" id="downloadBtn">Скачать</a>
+    <div class="download-info">
+      <span>50K+ Активных игроков</span>
+      <span>Поддержка 24/7</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Выбрать пакеты ===== -->
+<section id="traffic" class="fade-in">
+  <div class="container">
+    <h2>Выбрать пакеты</h2>
+    <div class="packages">
+      <div class="package-card">
+        <h3>Free</h3>
+        <p>ESP</p>
+        <a class="glow-button">Получить</a>
+      </div>
+      <div class="package-card">
+        <h3>Pro</h3>
+        <p>Все функции</p>
+        <a class="glow-button">Купить</a>
+        <p style="color:#888; margin-top:10px;">$3.70</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Скриншоты ===== -->
+<section id="screenshots" class="fade-in">
+  <div class="container">
+    <div class="screenshot-row">
+      <div class="screenshot-text">
+        <h2>Skins</h2>
+        <p>Skinchanger</p>
+      </div>
+      <div class="screenshot-image">
+        <img src="images/skins.png">
+      </div>
+    </div>
+    <div class="screenshot-row reverse">
+      <div class="screenshot-text">
+        <h2>Visuals</h2>
+        <p>ESP, WallHack, Chams</p>
+      </div>
+      <div class="screenshot-image">
+        <img src="images/visuals.png">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="fade-in">
+  <div class="container">
+    <h2>FAQ</h2>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <h3>Как скачать ZENDER?</h3>
+      <div class="faq-answer"><p>Нажмите кнопку «Скачать».</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <h3>Какие игры поддерживаются?</h3>
+      <div class="faq-answer"><p>Только CS2.</p></div>
+    </div>
+    <div class="faq-item" onclick="toggleFAQ(this)">
+      <h3>Можно ли вернуть деньги?</h3>
+      <div class="faq-answer"><p>Да, в течение 14 дней.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Сообщество ===== -->
+<section id="community" class="fade-in">
+  <div class="container">
+    <h2>Сообщество ZENDER</h2>
+    <p>Наш официальный Telegram-канал</p>
+    <button id="community-btn">Перейти в Telegram</button>
+  </div>
+</section>
+
+<!-- ===== Чат ===== -->
+<div id="corner-circle">
+  <svg viewBox="0 0 24 24" fill="#fff" width="28">
+    <path d="M2 2v20l4-4h16V2H2zm2 2h16v12H8.828L4 20V4z"/>
+  </svg>
+</div>
+<div id="chat-box">
+  <div id="chat-header">Поддержка AI</div>
+  <div id="chat-messages"></div>
+  <div id="chat-input">
+    <input id="user-input" type="text" placeholder="Напишите сообщение...">
+    <button id="send-btn">OK</button>
+  </div>
+</div>
+
+<script>
+/* ===== Плавный скролл колесиком ===== */
+let targetScroll = window.scrollY;
+let currentScroll = window.scrollY;
+const ease = 0.07;
+
+window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    targetScroll += e.deltaY;
+    targetScroll = Math.max(0, Math.min(targetScroll, document.body.scrollHeight - window.innerHeight));
+}, { passive: false });
+
+function smoothScroll() {
+    currentScroll += (targetScroll - currentScroll) * ease;
+    window.scrollTo(0, currentScroll);
+    requestAnimationFrame(smoothScroll);
+}
+requestAnimationFrame(smoothScroll);
+
+/* Кнопки */
+document.getElementById("home-btn").onclick = () => targetScroll = 0;
+document.getElementById("downloadBtn").onclick = () => targetScroll = document.getElementById("traffic").offsetTop;
+document.getElementById("community-btn").onclick = () => window.location.href = "https://web.telegram.org/k/#@zendercheat";
+
+/* FAQ */
+function toggleFAQ(el){
+    const ans = el.querySelector(".faq-answer");
+    if(ans.style.maxHeight) ans.style.maxHeight = null;
+    else ans.style.maxHeight = ans.scrollHeight + "px";
+}
+
+/* Анимация появления */
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add("show");
+    });
+}, { threshold:0.2 });
+document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+/* Чат */
+const chatCircle = document.getElementById("corner-circle");
+const chatBox = document.getElementById("chat-box");
+const chatMessages = document.getElementById("chat-messages");
+const sendBtn = document.getElementById("send-btn");
+const userInput = document.getElementById("user-input");
+let chatOpen = false;
+chatCircle.onclick = () => { chatOpen = !chatOpen; chatBox.style.display = chatOpen ? "flex" : "none"; }
+function addMessage(sender, text){
+    const msg = document.createElement("div");
+    msg.style.opacity = "0"; msg.style.transition = "0.4s";
+    msg.innerHTML = `<b>${sender}:</b> ${text}<br><br>`;
+    chatMessages.appendChild(msg);
+    setTimeout(() => { msg.style.opacity = "1"; }, 20);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+sendBtn.onclick = sendMessage;
+userInput.addEventListener("keypress", e => { if(e.key === "Enter") sendMessage(); });
+function sendMessage(){
+    const text = userInput.value.trim();
+    if(!text) return;
+    addMessage("Вы", text);
+    userInput.value = "";
+    setTimeout(() => { addMessage("AI", "Спасибо, ваше сообщение отправлено!"); }, 500);
+}
+
+/* Canvas фон */
+const c = document.getElementById("bg-canvas");
+const ctx = c.getContext("2d");
+c.width = window.innerWidth; c.height = window.innerHeight;
+let circles = [];
+for(let i=0;i<60;i++){ circles.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*3+1,dx:Math.random()*1-0.5,dy:Math.random()*1-0.5}); }
+function animate(){
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle = "rgba(255,255,255,0.4)";
+    circles.forEach(circ=>{
+        ctx.beginPath(); ctx.arc(circ.x,circ.y,circ.r,0,Math.PI*2); ctx.fill();
+        circ.x += circ.dx; circ.y += circ.dy;
+        if(circ.x<0) circ.x=c.width; if(circ.x>c.width) circ.x=0;
+        if(circ.y<0) circ.y=c.height; if(circ.y>c.height) circ.y=0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+window.addEventListener("resize",()=>{c.width=window.innerWidth;c.height=window.innerHeight;});
+</script>
+
+</body>
+</html>
